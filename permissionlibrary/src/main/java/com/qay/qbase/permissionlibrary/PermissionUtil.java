@@ -22,9 +22,7 @@ import java.util.Map;
 
 /**
  * Created by Qay on 2017/3/8.
- * 权限处理类
  */
-
 public class PermissionUtil {
 
     public static final int CODE_READ_EXTERNAL_STORAGE = 1;
@@ -73,7 +71,7 @@ public class PermissionUtil {
 
 
     /**
-     * 获取请求权限
+     * get request permission
      */
     private static String getPermission(int requestCode) {
         String permission = "";
@@ -124,7 +122,7 @@ public class PermissionUtil {
     }
 
     /**
-     * 打开设置界面
+     * open setting activity
      */
     private static void openSetting(Context context) {
         try {
@@ -151,10 +149,10 @@ public class PermissionUtil {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             boolean isExit = permissionExist(activity, requestPermission);
             if (isExit) {
-                //权限存在manifest中
+                //check permission is in manifest
                 permissionGrant.onPermissionGranted(requestCode);
             } else {
-                //TODO 没有权限
+                //TODO no permission
                 Toast.makeText(activity, requestPermission, Toast.LENGTH_SHORT).show();
             }
 
@@ -167,18 +165,18 @@ public class PermissionUtil {
             return;
         }
 
-        //是否有权限
+        //is permission
         boolean permission_granted = checkPermission(activity, requestPermission);
 
         if (permission_granted) {
-            //有权限
+            //has permission
             Toast.makeText(activity, "opened:" + requestPermissions[requestCode], Toast.LENGTH_SHORT).show();
             permissionGrant.onPermissionGranted(requestCode);
         } else {
-            //没有权限
+            //no permission
             boolean rationale = showRequestRationale(activity, requestPermission);
             if (rationale) {
-                //TODO 显示dialog 提示
+                //TODO show dialog
                 shouldShowRationale(activity, requestCode, requestPermission);
                 Toast.makeText(activity, requestPermission, Toast.LENGTH_SHORT).show();
             } else {
@@ -258,11 +256,10 @@ public class PermissionUtil {
         for (int i = 0; i < requestPermissions.length; i++) {
             String requestPermission = requestPermissions[i];
             if (!requestPermission.equals(PERMISSION_SYSTEM_ALERT_WINDOW)) {
-                //是否有权限
+                //has permission
                 boolean permission_granted = checkPermission(activity, requestPermission);
                 if (!permission_granted) {
                     //no permission
-                    //没有权限
                     boolean rationale = showRequestRationale(activity, requestPermission);
                     if (rationale) {
                         if (isShouldRationale) {

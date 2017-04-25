@@ -5,9 +5,9 @@ classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
 classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 在local.properties中设置
 bintray.user=qbase
-bintray.apikey=64fa39df3aeffbc4d8a7d4f0271b627e904535d4
+bintray.apikey=fd44ddb989be5943dbb1eec8ed2e4f8dbca1a4b3
 
-安装gradle:gradlew installgra
+安装gradle:gradlew install
 
 上传项目到https://jcenter.bintray.com/com/qay/qbase
 
@@ -16,4 +16,7 @@ bintray.apikey=64fa39df3aeffbc4d8a7d4f0271b627e904535d4
 2.在https://bintray.com项目源网页上,
    如果是第一次新加项目，则需要Add New Package
    如果不是，则直接会更新成新版本
+
+bug:
+  1. http://blog.csdn.net/qq_23018915/article/details/51055470
 
