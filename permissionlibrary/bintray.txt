@@ -1,0 +1,19 @@
+https://jcenter.bintray.com
+
+根目录 gradle
+classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
+classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+在local.properties中设置
+bintray.user=qbase
+bintray.apikey=64fa39df3aeffbc4d8a7d4f0271b627e904535d4
+
+安装gradle:gradlew installgra
+
+上传项目到https://jcenter.bintray.com/com/qay/qbase
+
+1.翻墙
+1.在Therminal中运行：gradlew bintrayUpload
+2.在https://bintray.com项目源网页上,
+   如果是第一次新加项目，则需要Add New Package
+   如果不是，则直接会更新成新版本
+
