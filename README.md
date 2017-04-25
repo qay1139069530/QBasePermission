@@ -1,0 +1,2 @@
+# QBasePermission
+Android base permission
