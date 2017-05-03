@@ -1,0 +1,95 @@
+//配置插件
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+//这个是版本号
+version = "0.0.1"
+//compile 'com.qay.qbase:animation:1.0.0'中的com.qay.qbase
+// 这里是groupId ,必须填写  一般填你唯一的包名
+group = "com.qbase"
+// 项目的主页
+def siteUrl = 'https://github.com/qay1139069530/QBasePermission'
+// Git仓库的url
+def gitUrl = 'https://github.com/qay1139069530/QBasePermission.git'
+// Git仓库的issue url
+def issueUrl = 'https://github.com/qay1139069530/QBasePermission/issues'
+// 描述
+def libdesc = 'Android Base animation'
+
+// 这里是读取Bintray相关的信息，我们上传项目到github上的时候会把gradle文件传上去，
+// 所以不要把帐号密码的信息直接写在这里，写在local.properties中，这里动态读取。
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    //读取 local.properties 文件里面的 bintray.user
+    user = properties.getProperty("bintray.user")
+    //读取 local.properties 文件里面的 bintray.apikey
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives'] //When uploading configuration files
+    pkg {
+        repo = 'qay_base'
+        name = project.name
+        desc = libdesc
+        websiteUrl = siteUrl
+        issueTrackerUrl = issueUrl
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'example']
+        publicDownloadNumbers = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'android base library'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'qaybase'
+                        name 'wuhen'
+                        email 'qay_wuheng@hotmail.com'
+                    }
+                }
+                scm {
+                    connection gitUrl
+                    developerConnection gitUrl
+                    url siteUrl
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+task findConventions << {
+    println project.getConvention()
+}

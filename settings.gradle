@@ -1,1 +1,1 @@
-include ':app', ':permissionlibrary'
+include ':app', ':permission'

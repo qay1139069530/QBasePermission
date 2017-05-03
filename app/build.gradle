@@ -38,6 +38,6 @@ dependencies {
     //v13
     compile "com.android.support:support-v13:$rootProject.supportLibraryVersion"
     //third
-    compile project(':permissionlibrary')
+    compile project(':permission')
 
 }
